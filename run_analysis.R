@@ -1,6 +1,15 @@
+library(dplyr)
+
+X_test <- read.table("X_test.txt", stringsAsFactors = FALSE)
+y_test <- read.table("y_test.txt", stringsAsFactors = FALSE)
+y_train <- read.table("y_train.txt", stringsAsFactors = FALSE)
+X_train <- read.table("X_train.txt", stringsAsFactors = FALSE)
+features <- read.table("features.txt", stringsAsFactors = FALSE)
+activity_labels <- read.table("activity_labels.txt", stringsAsFactors = FALSE)
+
 onedatasetx <- bind_rows(X_test,X_train)
 onedatasety <- bind_rows(y_test,y_train)
-colnames(onedatasetx) <- features
+colnames(onedatasetx) <- features$V2
 colnames(onedatasety) <- "train"
 onedataset <- bind_cols(onedatasety,onedatasetx)
 m.std.colnames <- grep("mean|std|train",colnames(onedataset))
